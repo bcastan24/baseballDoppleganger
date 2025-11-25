@@ -1,28 +1,30 @@
 class Player:
     def __init__(self, data, name):
       self.data = data
-      self.age_and_war = self.make_dict()
+      self.war = self.make_list()
       self.name = name
 
-    def make_dict(self):
+    def make_list(self):
       summed = self.data.groupby('Age')['WAR'].sum()
-      aw = summed.to_dict()
+      aw = summed.to_list()
       return aw
 
     def first_age(self):
-      return min(self.age_and_war.keys())
+      return self.ages()[0]
 
     def first_war(self):
-      return self.age_and_war.get(self.first_age())
-
-    def get_war(self, age):
-      return self.age_and_war[age]
+      return self.war[0]
 
     def get_name(self):
       return self.name
 
     def career_len(self):
-      return len(self.ages())
+      return len(self.war)
 
     def ages(self):
-      return self.age_and_war.keys()
+        s = self.data['Age'].to_list()
+        s.sort()
+        return s
+
+    def get_list(self):
+        return self.war
