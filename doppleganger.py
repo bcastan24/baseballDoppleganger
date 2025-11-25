@@ -11,16 +11,16 @@ def get_doppleganger(players, name):
       p = player
   p1 = p.first_war() + 1
   p2 = p.first_war() - 1
-  p3 = p.first_age() + 1
-  p4 = p.first_age() - 1
   potential = []
   for player in players:
-    if p2 < player.first_war() < p1 and p4 < player.first_age() < p3 and player.get_name() != p.get_name():
+    if p2 < player.first_war() < p1 and player.get_name() != p.get_name():
       potential.append(player)
   for q in potential:
-    w1 = p.get_wars()
-    w2 = q.get_wars()
-    acc = 100 - float(war_similarity(w1, w2))
-    my_dict[q.get_name()] = acc
+    if q.career_len() > p.career_len():
+        w1 = p.get_wars()
+        w2 = q.get_wars()
+        acc = 100 - float(war_similarity(w1, w2))
+        if acc > 80.0:
+            my_dict[q.get_name()] = acc
 
   return my_dict
