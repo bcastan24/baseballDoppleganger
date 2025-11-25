@@ -7,8 +7,8 @@ class Player:
     def __make_list(self):
       summed = self.data.groupby('Age')['WAR'].sum().sort_index()
       ages = list(summed.index)
-      wars = list(summed.values)
-      if wars[0] < 0.0:
+      wars = list(map(float, summed.values))
+      if wars[0] < 1.0 and len(wars) > 1:
           wars.pop(0)
           ages.pop(0)
       return ages, wars

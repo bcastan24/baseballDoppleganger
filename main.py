@@ -1,5 +1,5 @@
 import cleanData as cd
+import doppleganger as dp
 
 players = cd.clean_data()
-print(players[0].get_ages())
-print(players[0].get_wars())
+print(dp.get_doppleganger(players, 'Aaron Judge'))
